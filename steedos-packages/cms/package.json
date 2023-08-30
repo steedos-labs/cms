@@ -1,0 +1,32 @@
+{
+  "name": "@steedos-labs/cms",
+  "version": "0.0.5",
+  "description": "",
+  "main": "package.service.js",
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "build:watch": "webpack --config webpack.config.js --watch",
+    "release": "WEBPACK_BUNDLE=production yarn build && npm publish --registry https://registry.npmjs.org",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@steedos/utils": "^2.5.11-beta.10",
+    "@steedos/service-package-loader": "^2.5.12-beta.10"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.9",
+    "@babel/preset-env": "^7.22.9",
+    "babel-loader": "^9.1.3",
+    "moleculer-repl": "^0.7.3",
+    "moleculer-web": "^0.10.5",
+    "nats": "^2.14.0",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-node-externals": "^3.0.0"
+  }
+}

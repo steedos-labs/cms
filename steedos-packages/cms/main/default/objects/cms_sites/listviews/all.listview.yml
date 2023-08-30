@@ -1,0 +1,17 @@
+name: all
+label: All Sites
+filter_scope: space
+columns:
+  - name
+  - visibility
+  - order
+filters: !<tag:yaml.org,2002:js/function> |-
+  function () {
+    if(!Steedos.isSpaceAdmin()){
+      return [["owner","=","{userId}"], "or", ["admins","=","{userId}"]];
+    }
+  }
+scrolling_mode: standard
+shared: true
+sort_no: 100
+type: grid

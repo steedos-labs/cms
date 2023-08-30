@@ -1,0 +1,5 @@
+name: viewCount
+label: Count
+type: number
+omit: true
+hidden: true

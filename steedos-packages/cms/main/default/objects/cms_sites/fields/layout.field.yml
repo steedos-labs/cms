@@ -1,0 +1,6 @@
+name: layout
+label: Layout
+type: textarea
+rows: 3
+is_wide: true
+group: Site

@@ -1,0 +1,6 @@
+name: members.organizations
+type: lookup
+label: Organization Members
+reference_to: organizations
+multiple: true
+filterable: true

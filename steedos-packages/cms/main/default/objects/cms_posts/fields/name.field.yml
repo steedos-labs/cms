@@ -1,0 +1,9 @@
+name: name
+label: Title
+type: text
+defaultValue: ''
+description: ''
+inlineHelpText: ''
+required: true
+searchable: true
+is_wide: true

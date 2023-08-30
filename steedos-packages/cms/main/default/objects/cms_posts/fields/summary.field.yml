@@ -1,0 +1,7 @@
+name: summary
+type: textarea
+label: Summary
+rows: 2
+is_wide: true
+omit: true
+hidden: true

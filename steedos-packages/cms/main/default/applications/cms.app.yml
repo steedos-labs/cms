@@ -1,0 +1,12 @@
+name: 信息发布
+code: cms
+description: 站点、栏目、文章
+icon_slds: approval
+is_creator: true
+mobile: true
+objects:
+  - cms_sites
+  - cms_categories
+  - cms_posts
+sort: 9100
+visible: true

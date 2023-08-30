@@ -1,0 +1,4 @@
+name: members
+type: object
+label: Members
+is_wide: true
