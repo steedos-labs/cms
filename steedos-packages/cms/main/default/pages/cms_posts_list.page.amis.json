@@ -60,10 +60,11 @@
                                         "headers": {
                                             "Authorization": "Bearer ${context.tenantId},${context.authToken}"
                                         },
-                                        "adaptor": "const rows = payload.data.rows;\n// console.log('roows==>', rows);\n\nconst getChildren = (records, record_id, site) => {\n  const children = _.filter(records, (record) => {\n    return record_id === record.parent\n  });\n  const childrens = _.map(children, (item, index) => {\n    return {\n      _id: item._id, label: item.name, to: \"\", value: index + '', icon: \"fa fa-user\", object_name: 'cms_categories', site: site, parent: item._id,\n      children: getChildren(records, item._id, site),\n      additionalFilters: [[\"site\", \"=\", site], [\"category\", \"=\", item._id]]\n    }\n  })\n  // console.log('children==>', children)\n  return childrens;\n}\n\nconst links = _.map(rows, (item, index) => {\n  const records = item._categories;\n  const treeRecords = [];\n  _.each(records, (record, index) => {\n    if (!record.parent) {\n      treeRecords.push(Object.assign(\n        {},\n        {\n          _id: record._id, label: record.name, to: \"\", value: index + '', icon: \"fa fa-user\",\n          object_name: 'cms_categories',\n          site: item._id,\n          parent: record._id,\n          additionalFilters: [[\"site\", \"=\", item._id], [\"category\", \"=\", record._id]]\n        },\n        { children: getChildren(records, record._id, item._id) }\n      ));\n    }\n  });\n  // console.log('treeRecords==>', treeRecords);\n  return {\n    _id: item._id,\n    label: item.name,\n    site: item._id,\n    parent: '',\n    object_name: 'cms_sites',\n    to: \"\",\n    value: index + '',\n    icon: \"fa fa-user\",\n    children: treeRecords,\n    additionalFilters: [\"site\", \"=\", item._id]\n  }\n})\n\npayload = {\n  data: {\n    links\n  },\n  msg: '',\n  status: 0\n}\nreturn payload;",
+                                        "adaptor": "\nconst user = api.data.context.user;\nconst userId = api.data.context.userId;\n\nconst rows = payload.data.rows;\n// console.log('roows==>', api);\n\nconst getChildren = (records, record_id, site, allowCreateSiteAndCategories) => {\n  const children = _.filter(records, (record) => {\n    return record_id === record.parent\n  });\n  const childrens = _.map(children, (item, index) => {\n    return {\n      _id: item._id, label: item.name, to: \"\", value: index + '', icon: \"fa fa-user\", object_name: 'cms_categories',\n      site: site, allowCreateSiteAndCategories: allowCreateSiteAndCategories, parent: item._id,\n      children: getChildren(records, item._id, site, allowCreateSiteAndCategories),\n      additionalFilters: [[\"site\", \"=\", site], [\"category\", \"=\", item._id]]\n    }\n  })\n  // console.log('children==>', children)\n  return childrens;\n}\n\nconst links = _.map(rows, (item, index) => {\n  // 1、是否是大管理员， user.is_space_admin\n  // 2、是否是站点成员，admins.includes(userId)\n  // 3、是否是当事人 owner === userId\n  \n  let allowCreateSiteAndCategories = false;\n  if (user.is_space_admin || item.admins.includes(userId) || item.owner === userId) {\n    allowCreateSiteAndCategories = true;\n  }\n  const records = item._categories;\n  const treeRecords = [];\n  _.each(records, (record, index) => {\n    if (!record.parent) {\n      treeRecords.push(Object.assign(\n        {},\n        {\n          _id: record._id, label: record.name, to: \"\", value: index + '', icon: \"fa fa-user\",\n          object_name: 'cms_categories',\n          site: item._id,\n          allowCreateSiteAndCategories: allowCreateSiteAndCategories,\n          parent: record._id,\n          additionalFilters: [[\"site\", \"=\", item._id], [\"category\", \"=\", record._id]]\n        },\n        { children: getChildren(records, record._id, item._id, allowCreateSiteAndCategories) }\n      ));\n    }\n  });\n  // console.log('treeRecords==>', treeRecords);\n  return {\n    _id: item._id,\n    label: item.name,\n    site: item._id,\n    allowCreateSiteAndCategories,\n    parent: '',\n    object_name: 'cms_sites',\n    to: \"\",\n    value: index + '',\n    icon: \"fa fa-user\",\n    children: treeRecords,\n    additionalFilters: [\"site\", \"=\", item._id]\n  }\n})\n// console.log('links==>', links);\npayload = {\n  data: {\n    links\n  },\n  msg: '',\n  status: 0\n}\nreturn payload;",
                                         "requestAdaptor": "",
                                         "data": {
-                                            "query": "{rows:cms_sites(filters: [], top: 20, skip: 0, sort: \"\"){_id,name,visibility,order,_display:_ui{visibility,order},_categories:_related_cms_categories_site{_id,name,parent,order}},count:cms_sites__count(filters:[])}"
+                                            "query": "{rows:cms_sites(filters: [], top: 20, skip: 0, sort: \"\"){_id,name,visibility,order,admins,owner,_display:_ui{visibility,order},_categories:_related_cms_categories_site{_id,name,parent,order}},count:cms_sites__count(filters:[])}",
+                                            "context": "${context}"
                                         },
                                         "messages": {}
                                     },
@@ -220,7 +221,7 @@
                                                 },
                                                 {
                                                     "type": "button",
-                                                    "label": "删除",
+                                                    "label": "删除栏目",
                                                     "visibleOn": "${object_name === 'cms_categories'}",
                                                     "confirmText": "确定要删除 ${label} 栏目吗？",
                                                     "onEvent": {
@@ -294,10 +295,12 @@
                                                         "id": "u:16fb32580cf2",
                                                         "closeOnEsc": false,
                                                         "size": "md"
-                                                    }
+                                                    },
+                                                    "visibleOn": "${allowCreateSiteAndCategories}"
                                                 }
                                             ],
-                                            "id": "u:39af3408b67d"
+                                            "id": "u:39af3408b67d",
+                                            "visibleOn": "${allowCreateSiteAndCategories}"
                                         }
                                     ],
                                     "draggable": false,
