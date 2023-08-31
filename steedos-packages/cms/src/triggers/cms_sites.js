@@ -2,7 +2,7 @@
  * @Author: baozhoutao@steedos.com
  * @Date: 2023-08-06 15:34:32
  * @LastEditors: baozhoutao@steedos.com
- * @LastEditTime: 2023-08-30 10:17:03
+ * @LastEditTime: 2023-08-30 18:06:19
  * @Description:
  */
 module.exports = {
@@ -25,7 +25,7 @@ module.exports = {
       if (doc.admins.indexOf(userId) < 0) {
         return doc.admins.push(userId);
       }
-      return doc;
+      return {doc};
     },
   },
   cms_sites_beforeUpdate: {
@@ -43,21 +43,19 @@ module.exports = {
       //     doc.admins.push(userId);
       //   }
       // }
-      return doc;
+      return {doc};
     },
   },
-  cms_sites_beforeRemove: {
+  cms_sites_beforeDelete: {
     trigger: {
       listenTo: "cms_sites",
-      when: ["beforeRemove"],
+      when: ["beforeDelete"],
     },
     async handler(ctx) {
       const { doc, userId, id } = ctx.params;
       if (!userId) {
         throw new Error("cms_error_login_required");
       }
-
-
       const category = await ctx.broker.call(`objectql.count`, {objectName: 'cms_categories', filters: ['site', '=', doc._id]})
       if (category > 0) {
         throw new Error("cms_sites_error_has_categories");

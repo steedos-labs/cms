@@ -18,6 +18,10 @@ fields:
     label: 正文
     help: 
     description: 
+  enable_post_permissions:
+    label: 启用文章级权限
+    help: 
+    description: 
   site:
     label: 站点
     help: 

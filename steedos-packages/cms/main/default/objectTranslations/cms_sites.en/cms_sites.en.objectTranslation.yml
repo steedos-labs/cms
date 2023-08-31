@@ -26,10 +26,6 @@ fields:
       - label: 'Public - Anonymous accessible, only members can edit .'
         value: public
     description: 
-  enable_post_permissions:
-    label: Enable Article Level Permissions
-    help: 
-    description: 
   order:
     label: Sort Number
     help: 

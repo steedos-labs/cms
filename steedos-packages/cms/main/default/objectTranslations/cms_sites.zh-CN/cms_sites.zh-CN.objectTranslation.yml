@@ -26,10 +26,6 @@ fields:
       - label: 网站 - 匿名可访问
         value: public
     description: 
-  enable_post_permissions:
-    label: 启用文章级权限
-    help: 
-    description: 
   order:
     label: 排序号
     help: 

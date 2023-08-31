@@ -2,7 +2,7 @@
  * @Author: baozhoutao@steedos.com
  * @Date: 2023-08-06 15:34:32
  * @LastEditors: baozhoutao@steedos.com
- * @LastEditTime: 2023-08-30 09:54:02
+ * @LastEditTime: 2023-08-30 18:05:54
  * @Description: 
  */
 
@@ -36,13 +36,13 @@ module.exports = {
 
             // doc.modified_by = userId;
             // doc.modified = new Date();
-            return doc;
+            return {doc};
         }  
     },
-    cms_categories_beforeRemove: {
+    cms_categories_beforeDelete: {
         trigger: { 
             listenTo: 'cms_categories', 
-            when: ['beforeRemove']
+            when: ['beforeDelete']
         },
         async handler(ctx) {
             const { doc, userId, id } = ctx.params;

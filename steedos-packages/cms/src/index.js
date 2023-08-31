@@ -2,12 +2,14 @@
  * @Author: baozhoutao@steedos.com
  * @Date: 2023-08-09 11:47:34
  * @LastEditors: baozhoutao@steedos.com
- * @LastEditTime: 2023-08-28 10:27:03
+ * @LastEditTime: 2023-08-30 17:46:41
  * @Description: 
  */
 const path = require('path');
 const packageName = "@steedos-labs/cms";
 const packageLoader = require('@steedos/service-package-loader');
+
+const triggers = require('./triggers/index.js');
 
 module.exports = {
     name: packageName,
@@ -22,6 +24,7 @@ module.exports = {
         },
     },
     actions: {
+        ...triggers
     },
     methods: {
     },

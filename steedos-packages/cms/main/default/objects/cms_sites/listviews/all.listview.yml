@@ -11,7 +11,3 @@ filters: !<tag:yaml.org,2002:js/function> |-
       return [["owner","=","{userId}"], "or", ["admins","=","{userId}"]];
     }
   }
-scrolling_mode: standard
-shared: true
-sort_no: 100
-type: grid

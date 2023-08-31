@@ -13,6 +13,10 @@ fields:
   body:
     label: Body
     help: 
+    description:
+  enable_post_permissions:
+    label: Enable Article Level Permissions
+    help: 
     description: 
   htmlBody:
     label: Main Body
