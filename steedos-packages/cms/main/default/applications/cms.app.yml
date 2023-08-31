@@ -5,8 +5,8 @@ icon_slds: approval
 is_creator: true
 mobile: true
 objects:
-  - cms_sites
-  - cms_categories
+  # - cms_sites
+  # - cms_categories
   - cms_posts
 sort: 9100
 visible: true
