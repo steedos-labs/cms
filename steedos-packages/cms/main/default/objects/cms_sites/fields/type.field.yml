@@ -8,3 +8,4 @@ options:
     value: space
   - label: User
     value: user
+sort_no: 10

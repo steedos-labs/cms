@@ -4,3 +4,4 @@ type: textarea
 rows: 3
 is_wide: true
 group: Site
+sort_no: 100

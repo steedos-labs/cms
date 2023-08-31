@@ -6,3 +6,4 @@ inlineHelpText: ''
 required: true
 searchable: true
 is_wide: true
+sort_no: 20

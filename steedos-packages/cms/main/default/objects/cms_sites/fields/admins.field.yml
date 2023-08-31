@@ -5,3 +5,4 @@ is_wide: true
 reference_to: users
 multiple: true
 defaultValue: "{userId}"
+sort_no: 60
