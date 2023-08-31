@@ -42,7 +42,15 @@ module.exports = {
             }) and (${filters.formatFiltersToODataQuery(siteFilters)})`,
           },
         };
-      } else {
+      } else if(!query.filters){
+        return {
+          query: {
+            ...query,
+            filters: `(${filters.formatFiltersToODataQuery(siteFilters)})`,
+          },
+        };
+      }
+      else {
         return {
           query: {
             ...query,
