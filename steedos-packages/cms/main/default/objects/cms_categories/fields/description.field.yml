@@ -1,5 +1,5 @@
 name: description
 label: 描述
-sort_no: 120
+sort_no: 20
 type: text
 is_wide: true

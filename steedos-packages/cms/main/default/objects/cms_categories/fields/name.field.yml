@@ -2,5 +2,5 @@ name: name
 index: true
 label: 名称
 required: true
-sort_no: 100
+sort_no: 10
 type: text
