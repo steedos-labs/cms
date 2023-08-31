@@ -17,3 +17,4 @@ filtersFunction: !!js/function |
   }
 depend_on:
   - site
+sort_no: 60

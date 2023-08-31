@@ -4,3 +4,4 @@ label: Organization Members
 reference_to: organizations
 multiple: true
 filterable: true
+sort_no: 90

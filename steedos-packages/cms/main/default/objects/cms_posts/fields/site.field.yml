@@ -10,3 +10,4 @@ defaultValue: !!js/function |
     var site = Session.get("site");
     return site ? site._id : null;
   }
+sort_no: 50
