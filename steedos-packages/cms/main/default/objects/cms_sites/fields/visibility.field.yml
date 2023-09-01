@@ -8,4 +8,6 @@ options:
     value: private
   - label: Team - Users accessible , only members can edit .
     value: team
+  - label: Public - Anonymous accessible, only members can edit .
+    value: public
 sort_no: 30
