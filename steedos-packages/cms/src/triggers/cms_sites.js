@@ -2,7 +2,7 @@
  * @Author: baozhoutao@steedos.com
  * @Date: 2023-08-06 15:34:32
  * @LastEditors: baozhoutao@steedos.com
- * @LastEditTime: 2023-08-31 17:39:11
+ * @LastEditTime: 2023-09-01 15:27:57
  * @Description:
  */
 const util = require('@steedos/utils');
@@ -16,7 +16,11 @@ module.exports = {
       when: ["beforeFind"],
     },
     async handler(ctx) {
-      const { userId, spaceId, query } = ctx.params;
+      const { userId, spaceId, query, id } = ctx.params;
+
+      if(id){
+        return ;
+      }
 
       const userSession = await ctx.broker.call(
         "@steedos/service-accounts.getUserSession",
