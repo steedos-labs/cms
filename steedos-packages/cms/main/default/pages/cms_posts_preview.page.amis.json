@@ -22,9 +22,35 @@
                     "type": "wrapper",
                     "body": [
                         {
-                            "type": "html",
-                            "name": "htmlBody",
-                            "id": "u:0b6c6a4d83d3"
+                            "type": "form",
+                            "body": [
+                                {
+                                    "type": "fieldSet",
+                                    "title": "通用",
+                                    "collapsable": true,
+                                    "body": [
+                                        {
+                                            "type": "input-rich-text",
+                                            "name": "htmlBody",
+                                            "id": "u:0b6c6a4d83d3",
+                                            "receiver": "${context.rootUrl}/s3/images",
+                                            "options": {
+                                                "plugins": [
+                                                    "autoresize"
+                                                ],
+                                                "statusbar": false,
+                                                "readonly": true,
+                                                "toolbar": false,
+                                                "menubar": false
+                                            }
+                                        }
+                                    ],
+                                    "headingClassName": "hidden"
+                                }
+                            ],
+                            "wrapWithPanel": false,
+                            "className": "steedos-amis-form bg-white",
+                            "actions": []
                         }
                     ],
                     "id": "u:2c951f6c9be2",
@@ -64,6 +90,9 @@
         },
         ".cms-content-wrapper .antd-RichTextControl:hover": {
             "border": "none"
+        },
+        ".cms-content-wrapper fieldset.antd-Collapse > legend.hidden":{
+            "display": "none!important"
         }
     }
 }
