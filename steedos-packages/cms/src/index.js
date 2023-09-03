@@ -10,6 +10,7 @@ const packageName = "@steedos-labs/cms";
 const packageLoader = require('@steedos/service-package-loader');
 
 const triggers = require('./triggers/index.js');
+const rests = require('./rests/index.js');
 
 module.exports = {
     name: packageName,
@@ -24,7 +25,8 @@ module.exports = {
         },
     },
     actions: {
-        ...triggers
+        ...triggers,
+        ...rests
     },
     methods: {
     },

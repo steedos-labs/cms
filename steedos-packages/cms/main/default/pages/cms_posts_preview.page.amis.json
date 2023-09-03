@@ -1,0 +1,69 @@
+{
+    "type": "page",
+    "title": "Welcome to Steedos",
+    "body": [
+        {
+            "type": "service",
+            "body": [
+                {
+                    "type": "wrapper",
+                    "body": [
+                        {
+                            "type": "tpl",
+                            "tpl": "<b>${name}</b>",
+                            "id": "u:874f1bf37b23",
+                            "className": "post-title"
+                        }
+                    ],
+                    "id": "u:8c3d94e1fc9d",
+                    "className": "cms-header-wrapper"
+                },
+                {
+                    "type": "wrapper",
+                    "body": [
+                        {
+                            "type": "html",
+                            "name": "htmlBody",
+                            "id": "u:0b6c6a4d83d3"
+                        }
+                    ],
+                    "id": "u:2c951f6c9be2",
+                    "className": "cms-content-wrapper"
+                }
+            ],
+            "id": "u:42d0a855834a",
+            "messages": {},
+            "api": {
+                "url": "${context.rootUrl}/service/api/~packages-@steedos-labs/cms/cms_posts/${postId}/preview",
+                "method": "get",
+                "messages": {},
+                "requestAdaptor": "",
+                "adaptor": ""
+            }
+        }
+    ],
+    "regions": [
+        "body"
+    ],
+    "data": {
+        "initialValues": {},
+        "appId": "builder",
+        "title": "",
+        "context": {}
+    },
+    "id": "u:e445c1147db0",
+    "css": {
+        ".cms-header-wrapper .post-title": {
+            "font-size": "150%",
+            "text-align": "center",
+            "width": "100%",
+            "display": "inline-block"
+        },
+        ".cms-content-wrapper .antd-RichTextControl": {
+            "border": "none"
+        },
+        ".cms-content-wrapper .antd-RichTextControl:hover": {
+            "border": "none"
+        }
+    }
+}
