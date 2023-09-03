@@ -1,4 +1,4 @@
-name: designer
+name: cms_posts_preview
 amis_schema: |-
   {
     "type": "service",
@@ -46,7 +46,7 @@ amis_schema: |-
     "bodyClassName": "p-0"
   }
 is_enable: true
-label: 设计器
+label: 预览
 'on': record_only
 type: amis_button
 visible: true
