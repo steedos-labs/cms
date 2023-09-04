@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@steedos/utils": "^2.5.11-beta.10",
-    "@steedos/service-package-loader": "^2.5.12-beta.10"
+    "@steedos/service-package-loader": "^2.5.13-beta.3"
   },
   "devDependencies": {
     "@babel/core": "^7.22.9",

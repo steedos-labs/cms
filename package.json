@@ -26,6 +26,6 @@
     "moleculer-repl": "^0.7.3"
   },
   "devDependencies": {
-    "@steedos/service-package-loader": "^2.5.12-beta.19"
+    "@steedos/service-package-loader": "^2.5.13-beta.3"
   }
 }
