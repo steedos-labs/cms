@@ -28,19 +28,25 @@ tasks:
   - name: Build
     command: |
       yarn
+      # gp await-port 5000
       gp sync-done yarn
-      gp await-port 5000
       yarn build:watch
-  - name: Frontend
+  # - name: Frontend
+  #   command: |
+  #     gp await-port 5000
+  #     gp sync-await yarn
+  #     yarn frontend
+  - name: Steedos & Services
     command: |
-      gp await-port 5000
-      gp sync-await yarn
-      yarn frontend
-  - name: Services
-    command: |
-      gp await-port 5000
-      gp sync-await yarn
-      yarn build && yarn start
+      cd steedos-platform
+      yarn
+      gp sync-done yarn
+      yarn start
+  # - name: Services
+  #   command: |
+  #     gp await-port 5000
+  #     gp sync-await yarn
+  #     yarn build && yarn start
 
 vscode:
   extensions:
