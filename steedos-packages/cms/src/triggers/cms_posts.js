@@ -41,6 +41,11 @@ module.exports = {
             site = await ctx.broker.call(`objectql.findOne`, {objectName: 'cms_sites', id: siteId});
           }
 
+          if(!site && mQuery && mQuery.$and && mQuery.$and.length > 0 && mQuery.$and[0].$and[0].site){
+            const siteId = mQuery.$and[0].$and[0].site;
+            site = await ctx.broker.call(`objectql.findOne`, {objectName: 'cms_sites', id: siteId});
+          }
+
           const userSession = await ctx.broker.call('@steedos/service-accounts.getUserSession', {userId: userId, spaceId: spaceId});
           // 工作区管理员可看所有
           if(userSession && userSession.is_space_admin){
