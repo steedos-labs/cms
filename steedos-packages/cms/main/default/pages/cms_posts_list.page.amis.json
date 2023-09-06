@@ -3,7 +3,7 @@
     "body": [
         {
             "type": "service",
-            "id": "u:f6a209c8cf61",
+            "id": "outer_service",
             "data": {
                 "isVisible": true
             },
@@ -73,7 +73,7 @@
                                             "actions": [
                                                 {
                                                     "actionType": "setValue",
-                                                    "componentId": "u:f6a209c8cf61",
+                                                    "componentId": "outer_service",
                                                     "args": {
                                                         "value": {
                                                             "additionalFilters": "${event.data.item.additionalFilters}"
@@ -88,7 +88,7 @@
                                             "actions": [
                                                 {
                                                     "actionType": "setValue",
-                                                    "componentId": "u:f6a209c8cf61",
+                                                    "componentId": "outer_service",
                                                     "args": {
                                                         "value": {
                                                             "additionalFilters": "${event.data.item.additionalFilters}"
