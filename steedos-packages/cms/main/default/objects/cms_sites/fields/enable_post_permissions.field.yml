@@ -3,3 +3,4 @@ label: Enable Article Level Permissions
 type: boolean
 defaultValue: false
 sort_no: 40
+hidden: true
