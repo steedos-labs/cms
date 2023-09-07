@@ -28,12 +28,20 @@ module.exports = {
             when: ['beforeUpdate']
         },
         async handler(ctx) {
-            const { doc, userId, id } = ctx.params;
-            const record = await ctx.broker.call(`objectql.findOne`, {objectName: 'cms_categories', id: id, fields: ['_id']})
-            if (doc.parent === record._id) {
+            const { doc, userId, spaceId, id } = ctx.params;
+            if (doc.parent === id) {
                 throw new Error("cms_categories_error_deny_set_self");
             }
 
+            const userSession = await ctx.broker.call('@steedos/service-accounts.getUserSession', {userId: userId, spaceId: spaceId});
+            const is_space_admin = userSession && userSession.is_space_admin;
+            const site_record = await ctx.broker.call(`objectql.findOne`, {objectName: 'cms_sites', id: doc.site, fields: ["_id","admins"]});
+
+            const is_admin = site_record.admins && site_record.admins.indexOf(userId) > -1;
+            // 只有工作区管理员和站点成员可以修改栏目
+            if (!is_space_admin && !is_admin) {
+                throw new Error("cms_categories_error_no_permission_to_modify");
+            }
             // doc.modified_by = userId;
             // doc.modified = new Date();
             return {doc};
@@ -45,12 +53,24 @@ module.exports = {
             when: ['beforeDelete']
         },
         async handler(ctx) {
-            const { doc, userId, id } = ctx.params;
-            const records = await ctx.broker.call(`objectql.find`, {objectName: 'cms_categories', filters: [['parent', '=', id]], fields: ['_id']});
+            const { doc, userId, spaceId, id } = ctx.params;
+
+            const userSession = await ctx.broker.call('@steedos/service-accounts.getUserSession', {userId: userId, spaceId: spaceId});
+            const is_space_admin = userSession && userSession.is_space_admin;
+            const categorie_record = await ctx.broker.call(`objectql.findOne`, {objectName: 'cms_categories', id: id, fields: ["site"]});
+            const site_record = await ctx.broker.call(`objectql.findOne`, {objectName: 'cms_sites', id: categorie_record.site, fields: ["admins"]});
+
+            const is_admin = site_record.admins && site_record.admins.indexOf(userId) > -1;
+            // 只有工作区管理员和站点成员可以删除栏目
+            if (!is_space_admin && !is_admin) {
+                throw new Error("cms_categories_error_no_permission_to_delete");
+            }
+
+            const records = await ctx.broker.call(`objectql.find`, {objectName: 'cms_categories',query:{ filters: [['parent', '=', id]], fields: ['_id', "site"] } });
             if (records.length > 0) {
                 throw new Error("cms_categories_error_has_children");
             }
-            const post =await ctx.broker.call(`objectql.find`, {objectName: 'cms_categories', filters: [['category', '=', id]], fields: ['_id']});
+            const post =await ctx.broker.call(`objectql.find`, {objectName: 'cms_posts', query:{ filters: [['category', '=', id]], fields: ['_id']} });
             if (post.length > 0) {
                 throw new Error("cms_categories_error_has_posts");
             }
