@@ -109,20 +109,34 @@ module.exports = {
       when: ["beforeDelete"],
     },
     async handler(ctx) {
-      const { doc, userId, id } = ctx.params;
+      const { userId, spaceId, id } = ctx.params;
       if (!userId) {
         throw new Error("cms_error_login_required");
       }
+      
+      const userSession = await ctx.broker.call('@steedos/service-accounts.getUserSession', {userId: userId, spaceId: spaceId});
+      const is_space_admin = userSession && userSession.is_space_admin;
+      const doc = await ctx.broker.call(`objectql.findOne`, {objectName: 'cms_sites', id: id, fields: ["_id","admins"]});
+      const is_admin = doc.admins && doc.admins.indexOf(userId) > -1;
+      // 只有工作区管理员和站点成员可以删除站点
+      if (!is_space_admin && !is_admin) {
+          throw new Error("only_workspace_administrators_and_site_members_can_delete_the_site");
+      }
+      
       const category = await ctx.broker.call(`objectql.count`, {
         objectName: "cms_categories",
-        filters: ["site", "=", doc._id],
+        query: {
+          filters: ["site", "=", id]
+        }
       });
       if (category > 0) {
         throw new Error("cms_sites_error_has_categories");
       }
       const post = await ctx.broker.call(`objectql.count`, {
         objectName: "cms_posts",
-        filters: ["site", "=", doc._id],
+        query: {
+          filters: ["site", "=", id]
+        }
       });
       if (post > 0) {
         throw new Error("cms_sites_error_has_posts");
