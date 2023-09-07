@@ -24,6 +24,9 @@ module.exports = {
         async handler(ctx) {
           const { userId, spaceId, query } = ctx.params;
 
+          if(!userId){
+            return;
+          }
           const mQuery = util.metadataDriver.getMongoFilters(query.filters);
 
           let site = null;
