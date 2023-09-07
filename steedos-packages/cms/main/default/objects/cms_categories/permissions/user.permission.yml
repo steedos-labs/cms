@@ -7,7 +7,7 @@ allowEdit: true
 allowEditFiles: true
 allowRead: true
 allowReadFiles: true
-modifyAllRecords: false
+modifyAllRecords: true
 permission_set_id: user
 viewAllFiles: true
 viewAllRecords: true
