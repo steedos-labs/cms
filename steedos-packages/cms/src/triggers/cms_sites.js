@@ -18,7 +18,7 @@ module.exports = {
     async handler(ctx) {
       const { userId, spaceId, query, id } = ctx.params;
 
-      if(id){
+      if(!userId || id){
         return ;
       }
 
