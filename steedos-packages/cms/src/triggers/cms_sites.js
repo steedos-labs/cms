@@ -78,13 +78,6 @@ module.exports = {
         throw new Error("cms_error_login_required");
       }
 
-      doc.owner = userId;
-      if (!doc.admins) {
-        doc.admins = [userId];
-      }
-      if (doc.admins.indexOf(userId) < 0) {
-        return doc.admins.push(userId);
-      }
       return { doc };
     },
   },
@@ -94,15 +87,19 @@ module.exports = {
       when: ["beforeUpdate"],
     },
     async handler(ctx) {
-      const { doc, userId, id } = ctx.params;
+      const { doc, userId, spaceId, id } = ctx.params;
       if (!userId) {
         throw new Error("cms_error_login_required");
       }
-      // if (doc.admins) {
-      //   if (doc.admins.indexOf(userId) < 0) {
-      //     doc.admins.push(userId);
-      //   }
-      // }
+
+      const userSession = await ctx.broker.call('@steedos/service-accounts.getUserSession', {userId: userId, spaceId: spaceId});
+      const is_space_admin = userSession && userSession.is_space_admin;
+      const is_admin = doc.admins && doc.admins.indexOf(userId) > -1;
+      // 只有工作区管理员和站点成员可以修改站点
+      if (!is_space_admin && !is_admin) {
+          throw new Error("only_workspace_administrators_and_site_members_can_modify_the_site");
+      }
+
       return { doc };
     },
   },
