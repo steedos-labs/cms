@@ -41,7 +41,7 @@ module.exports = {
             site = await ctx.broker.call(`objectql.findOne`, {objectName: 'cms_sites', id: siteId});
           }
 
-          if(!site && mQuery && mQuery.$and && mQuery.$and.length > 0 && mQuery.$and[0].$and[0].site){
+          if(!site && mQuery && mQuery.$and && mQuery.$and.length > 0 && mQuery.$and[0].$and && mQuery.$and[0].$and.length > 0 && mQuery.$and[0].$and[0].site){
             const siteId = mQuery.$and[0].$and[0].site;
             site = await ctx.broker.call(`objectql.findOne`, {objectName: 'cms_sites', id: siteId});
           }
