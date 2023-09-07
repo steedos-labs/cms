@@ -97,7 +97,7 @@ module.exports = {
       const is_admin = doc.admins && doc.admins.indexOf(userId) > -1;
       // 只有工作区管理员和站点成员可以修改站点
       if (!is_space_admin && !is_admin) {
-          throw new Error("only_workspace_administrators_and_site_members_can_modify_the_site");
+          throw new Error("cms_sites_error_no_permission_to_modify");
       }
 
       return { doc };
@@ -120,7 +120,7 @@ module.exports = {
       const is_admin = doc.admins && doc.admins.indexOf(userId) > -1;
       // 只有工作区管理员和站点成员可以删除站点
       if (!is_space_admin && !is_admin) {
-          throw new Error("only_workspace_administrators_and_site_members_can_delete_the_site");
+          throw new Error("cms_sites_error_no_permission_to_delete");
       }
       
       const category = await ctx.broker.call(`objectql.count`, {
