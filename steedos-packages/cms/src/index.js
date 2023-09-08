@@ -2,7 +2,7 @@
  * @Author: baozhoutao@steedos.com
  * @Date: 2023-08-09 11:47:34
  * @LastEditors: baozhoutao@steedos.com
- * @LastEditTime: 2023-08-30 17:46:41
+ * @LastEditTime: 2023-09-08 18:36:55
  * @Description: 
  */
 const path = require('path');
@@ -32,7 +32,6 @@ module.exports = {
     },
 
     async started() {
-       console.log(`settings`, this.settings)
     }
 
 }
