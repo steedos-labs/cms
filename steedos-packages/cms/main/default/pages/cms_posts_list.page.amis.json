@@ -52,7 +52,9 @@
                             "body": [
                                 {
                                     "type": "nav",
-                                    "style": {},
+                                    "style": {
+                                        "marginTop": "10px"
+                                    },
                                     "id": "u:fef15e62ad3a",
                                     "onEvent": {
                                         "click": {
