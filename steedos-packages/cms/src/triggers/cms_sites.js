@@ -30,10 +30,10 @@ module.exports = {
       if (userSession && userSession.is_space_admin) {
         return;
       }
-
+      // 工作区管理员 和 站点成员可查看
       const siteFilters = [
-        ["owner", "=", userId],
-        "or",
+        // ["owner", "=", userId],
+        // "or",
         ["admins", "=", userId],
       ];
 
