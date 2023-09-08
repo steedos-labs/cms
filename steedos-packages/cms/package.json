@@ -1,6 +1,6 @@
 {
   "name": "@steedos-labs/cms",
-  "version": "0.0.5",
+  "version": "0.0.1",
   "description": "",
   "main": "package.service.js",
   "scripts": {
@@ -11,6 +11,7 @@
   },
   "author": "",
   "license": "ISC",
+  "private": false,
   "publishConfig": {
     "access": "public"
   },
