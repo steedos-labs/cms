@@ -116,10 +116,20 @@ module.exports = {
       when: ["beforeInsert"],
     },
     async handler(ctx) {
-      const { doc, userId } = ctx.params;
+      const { doc, userId, spaceId } = ctx.params;
 
       if (!userId) {
         throw new Error("cms_error_login_required");
+      }
+
+      const userSession = await ctx.broker.call('@steedos/service-accounts.getUserSession', {userId: userId, spaceId: spaceId});
+      const is_space_admin = userSession && userSession.is_space_admin;
+      const site_record = await ctx.broker.call(`objectql.findOne`, {objectName: 'cms_sites', id: doc.site, fields: ["admins"]});
+      const is_admin = site_record.admins && site_record.admins.indexOf(userId) > -1;
+
+      // 只有工作区管理员和站点成员可以新建栏目
+      if (!is_space_admin && !is_admin) {
+          throw new Error("cms_categories_error_no_permission_to_create");
       }
 
       if (doc.site) {
