@@ -31,7 +31,7 @@ fields:
     help: 
     description: 
   admins:
-    label: Site Members(Private)
+    label: Site Members
     help: 
     description: 
   description:

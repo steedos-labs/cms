@@ -35,7 +35,7 @@ fields:
     help: 
     description: 
   admins:
-    label: 站点成员（私有）
+    label: 站点成员
     help: 
     description: 
   description:
