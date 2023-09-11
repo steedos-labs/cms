@@ -1,4 +1,5 @@
 label: Visibility
+name: visibility
 type: select
 is_wide: true
 defaultValue: team
