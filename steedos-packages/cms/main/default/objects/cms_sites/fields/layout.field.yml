@@ -5,3 +5,4 @@ rows: 3
 is_wide: true
 group: Site
 sort_no: 100
+hidden: true
