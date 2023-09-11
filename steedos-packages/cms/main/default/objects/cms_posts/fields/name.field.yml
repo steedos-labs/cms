@@ -5,6 +5,7 @@ defaultValue: ''
 description: ''
 inlineHelpText: ''
 required: true
+filterable: true
 searchable: true
 is_wide: true
 sort_no: 10

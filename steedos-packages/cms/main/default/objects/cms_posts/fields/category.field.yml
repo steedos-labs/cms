@@ -2,6 +2,7 @@ name: category
 label: Category
 type: lookup
 reference_to: cms_categories
+filterable: true
 sortable: true
 defaultValue: !!js/function |
   function () {
