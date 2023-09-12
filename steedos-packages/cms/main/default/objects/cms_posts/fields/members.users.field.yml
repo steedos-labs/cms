@@ -5,3 +5,4 @@ reference_to: users
 multiple: true
 filterable: true
 sort_no: 80
+visible_on: "{{formData.enable_post_permissions}}"
