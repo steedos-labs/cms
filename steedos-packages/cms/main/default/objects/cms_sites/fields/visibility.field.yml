@@ -1,7 +1,7 @@
 label: Visibility
 name: visibility
 type: select
-is_wide: true
+# is_wide: true
 defaultValue: team
 required: true
 options:
