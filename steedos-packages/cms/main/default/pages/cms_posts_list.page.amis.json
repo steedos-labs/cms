@@ -184,6 +184,9 @@
         "disabled": true
     },
     "css": {
+        ".antd-Nav-Menu .antd-Nav-Menu-submenu-selected>.antd-Nav-Menu-submenu-title":{
+            "background": "rgba(21,137,238,.1)"
+        },
         ".page-list-grid": {
             "padding": "0px"
         },
